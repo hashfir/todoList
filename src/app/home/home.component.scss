@@ -1,0 +1,216 @@
+$size : 20px;
+#todo {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#todo td, #todo th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+html{
+  background-color:#c7ffcd;
+  h2{
+    text-align: center; 
+    font-weight: bold;
+  }
+}
+
+#todo tr:nth-child(even){background-color: #f2f2f2;}
+
+#todo tr:hover {background-color: #ddd;}
+
+#todo th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+table{
+  text-transform: capitalize;
+  margin: auto {
+    bottom: $size;
+    top: $size;
+  };
+};
+
+th{
+  &.number {
+    width: $size;
+    }
+  &.status{
+      width: $size + 80;
+    }
+  &.blank{
+    width: $size + 120;
+  }
+}
+
+.w3-button {
+  width:50px;
+  &.round{
+    margin-right: $size - 15;
+    border-radius: $size - 15;
+  }
+  &.menu{
+    width: 50%;
+    margin: auto{
+      left: 25%;
+      right: 25%;
+      top: 10px;
+    };
+    border-radius: $size - 15;
+  }
+}
+
+button{
+  margin-right: $size - 15;
+}
+
+//input form
+input{
+  &[type=text]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  &[type=submit]{
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover{
+      background-color: #45a049;
+    }
+  }
+}
+ select{
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+   }
+  
+
+  div { 
+    &.form-submit{
+      border-radius: 5px;
+      background-color: white;
+      padding: auto {
+        top: 7px;
+        left: $size;
+        right: $size;
+        bottom: $size;
+      }
+    width: 70%;
+    margin: auto{
+      top: $size;
+      bottom: $size;
+    };
+    }
+  }
+
+
+//modal
+*, *:before, *:after { box-sizing: border-box; };
+.modal-btn {
+  display: block;
+  margin: 0 auto;      
+  color: #fff;  
+  width: 160px;
+  height: 50px;    
+  line-height: 50px;    
+  background: #446CB3;
+  font-size: 22px;       
+  border: 0;
+  border-radius: 3px;  
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 5px 5px -5px #333;  
+  transition: background 0.3s ease-in;
+  &:hover { background: #365690; }
+}
+.modal-container {
+  margin: 60px auto;
+  padding-top: 0px;
+  position: relative;
+  width: 160px;    
+ 
+  .modal-content, 
+  .modal-backdrop {
+    height: 0; 
+    width: 0; 
+    opacity: 0;    
+    visibility: hidden;
+    overflow: hidden; 
+    cursor: pointer;
+    transition: opacity 0.2s ease-in; 
+  }
+       
+  .modal-content-btn {
+    position: absolute;
+    text-align: center;
+    cursor: pointer;
+    bottom: 20px;
+    right: 30px;
+    background: #446CB3;
+    color: #fff;
+    width: 50px;
+    border-radius: 2px;
+    font-size: 14px;
+    height: 32px;
+    padding-top: 9px;
+    font-weight: normal;
+    &:hover { color: #fff; background: #365690; }
+  }
+  #modal-toggle {
+    display: none;  
+    &.active ~ .modal-backdrop,
+    &:checked ~ .modal-backdrop {
+      background-color: rgba(0, 0, 0, 0.6);
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 9;
+      visibility: visible;
+      opacity: 1;      
+      transition: opacity 0.2s ease-in; 
+    }
+    &.active ~ .modal-content,
+    &:checked ~ .modal-content {
+      opacity: 1;
+      background-color: #fff;
+      max-width: 400px;
+      width: 400px;
+      height: 280px;
+      padding: 10px 30px;
+      position: fixed;
+      left: calc(50% - 200px);
+      top: 12%;
+      border-radius: 4px;
+      z-index: 999;
+      pointer-events: auto;
+      cursor: auto;
+      visibility: visible;      
+      box-shadow: 0 3px 7px rgba(0, 0, 0, 0.6);  
+      @media (max-width: 400px) { left: 0; }                   
+    }  
+  }
+}

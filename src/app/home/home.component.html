@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css">
+    <title>Todo List</title>
+</head>
+
+<body>
+    <button class="w3-button menu w3-blue" (click)="showFormCat()" type="checkbox">Show/Hide Form Category</button>
+    <div *ngIf="showCat" [@slideInOut] class="form-submit">
+        <h2>Create Category</h2>
+        <form [formGroup]="inputCategory">
+            <label for="category"> Category</label>
+            <input type="text" name="Category" formControlName="category"  placeholder="Category..">
+            <input type="submit" value="Submit" (click)="inputCat()">
+        </form>
+    </div>
+
+    <button class="w3-button menu w3-blue" (click)="showForm()" type="checkbox">Show/Hide Form Input</button>
+    <div *ngIf="show" [@slideInOut] class="form-submit">
+        <h2>TO DO LIST</h2>
+        <form [formGroup]="inputForm">
+            <label> Name</label>
+            <input formControlName="name" type="text" id="name" name="name" placeholder="Name..">
+            <label>Quantity</label>
+            <input formControlName="quantity" type="text" id="quantity" name="quantity" placeholder="Quantity">
+            <label>Status</label>
+            <select formControlName="status" class="select" id="status" name="Status">
+                <option value="1">Active</option>
+                <option value="0">Inactive</option>
+            </select>
+            <div>
+                <label>Category</label>
+                <select formControlName="category" class="select" name="Category">
+                    <option selected *ngFor="let cat of category" value="{{ cat.cat_id }}">{{ cat.category }}</option>
+                </select>
+            </div>
+            
+            <input type="submit" value="Submit" (click)="onSubmit()">
+        </form>
+    </div>
+
+    <button class="w3-button menu w3-blue" (click)="toggleShow()" type="checkbox">Show/Hide Table</button>
+
+    <div *ngIf="visible" [@slideInOut]>
+        <table style="width: 80%;" id="todo">
+            <tr>
+                <th class="number">No</th>
+                <th>Name</th>
+                <th class="status">Status</th>
+                <th>Quantity</th>
+                <th>Category</th>
+                <th class="blank"></th>
+            </tr>
+            <tr *ngFor="let item of todoData  | slice:0; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{ item.name }}</td>
+                <td *ngIf="item.status === '1'; else second">active</td>
+                <ng-template #second>
+                    <td *ngIf="item.status === '0'">inactive</td>
+                </ng-template>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.category }}</td>
+                <td>
+                    <button onclick="document.getElementById('id01').style.display='block'"
+                        class="w3-button round w3-orange fas fa-edit" (click)="edit(item)"></button>
+                    <!-- <button class="w3-button round w3-orange fas fa-edit" for="modal-toggle"></button> -->
+                    <button class="w3-button round w3-red fas fa-trash" (click)="delete(item)"></button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content">
+            <div class="w3-container">
+                <span onclick="document.getElementById('id01').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <div class="form-submit">
+                    <h2>Edit</h2>
+                    <form [formGroup]="editForm">
+                        <label> Name</label>
+                        <input formControlName="editname" type="text" id="name" name="name" placeholder="{{_name}}"
+                            value="{{_name}}">
+                        <label>Quantity</label>
+                        <input formControlName="editquantity" type="text" id="quantity" name="quantity"
+                            placeholder="{{_quantity}}" value="{{_quantity}}">
+                        <label>Status</label>
+                        <select formControlName="editstatus" class="select" id="status">
+                            <option disabled selected="selected">{{_status}}</option>
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                        <div>
+                            <label>Category</label>
+                            <select style="text-transform: capitalize;" formControlName="editcategory" class="select"
+                                name="Category">
+                                <option disabled selected="selected">{{_category}}</option>
+                                <option selected *ngFor="let cat of category" value="{{ cat.cat_id }}">
+                                    {{ cat.category }}</option>
+                            </select>
+                        </div>
+                        <input type="submit" value="Submit" (click)="onEdit()">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
